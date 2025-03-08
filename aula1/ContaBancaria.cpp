@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 ContaBancaria::ContaBancaria() {
     numeroDaConta = 0;
     numeroDaAgencia = 0;
@@ -50,7 +52,7 @@ void ContaBancaria::Sacar(float valor){
 
 void ContaBancaria::Consultar(){
     if(ativa) {
-        std::cout << "Saldo: " << saldo << std::endl;
+        cout << "Saldo: " << saldo << endl;
     }
 }
 
@@ -73,6 +75,9 @@ int main() {
     conta.Sacar(500);
     conta.Consultar();
     conta.Fechar();
+    int teste1;
+    int teste2;
+    cin >> teste1 >> teste2;  
 
     return 0;
 }

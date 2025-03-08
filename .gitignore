@@ -32,3 +32,4 @@
 *.app
 .vscode/settings.json
 .vscode/c_cpp_properties.json
+lista_01/ex01/ex01.cpp
