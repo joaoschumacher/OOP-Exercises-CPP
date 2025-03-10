@@ -23,7 +23,8 @@ class ContaBancaria {
         void sacar(float valor);
         void consultar();
         void fechar();
-        void retirarExtrato();
+        Transacao *retirarExtrato();
+        int getQuantidadeDeTransacoes();
     private:
         int numeroDaConta;
         int numeroDaAgencia;
