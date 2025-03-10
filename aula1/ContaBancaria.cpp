@@ -1,4 +1,5 @@
 #include "ContaBancaria.h"
+#include "Transacao.cpp"
 #include <iostream>
 #include <string>
 
@@ -9,28 +10,33 @@ ContaBancaria::ContaBancaria() {
     numeroDaAgencia = 0;
     nomeCliente = "";
     senha = "";
-    tipoDaConta = 0;
+    tipoDaConta = CONTA_CORRENTE;
     saldo = 0;
     ativa = false;
+    historicoDasTransacoes = new Transacao[100];
+    quantidadeDeTransacoes = 0;
 }
 
 ContaBancaria::~ContaBancaria() {
+    delete historicoDasTransacoes;
 }
 
-bool ContaBancaria::Abrir(int numeroConta, int numeroAgencia, std::string nome, int tipo) {
+bool ContaBancaria::abrir(int numeroConta, int numeroAgencia, string nome, TipoConta tipo) {
     if(ativa == false) {
         numeroDaConta = numeroConta;
         numeroDaAgencia = numeroAgencia;
         nomeCliente = nome;
         tipoDaConta = tipo;
         ativa = true;
+        historicoDasTransacoes = new Transacao[100];
+        quantidadeDeTransacoes = 0;
         return true;
     } else {
         return false;    
     }
 }
 
-bool ContaBancaria::AlteraSenha(std::string senhaNova){
+bool ContaBancaria::alteraSenha(string senhaNova){
     if(ativa) {
         senha = senhaNova;
         return true;
@@ -38,46 +44,64 @@ bool ContaBancaria::AlteraSenha(std::string senhaNova){
     return false;
 }
 
-void ContaBancaria::Depositar(float valor){
+void ContaBancaria::depositar(float valor){
     if(ativa) {
         saldo += valor;
+        historicoDasTransacoes[quantidadeDeTransacoes] = Transacao(DEPOSITO, valor, "", &numeroDaConta, &numeroDaConta);
+        quantidadeDeTransacoes++;
     }
 }
 
-void ContaBancaria::Sacar(float valor){
+void ContaBancaria::sacar(float valor){
     if(ativa) {
         saldo -= valor;
     }
+    historicoDasTransacoes[quantidadeDeTransacoes] = Transacao(SAQUE, valor, "", &numeroDaConta, &numeroDaConta);
+    quantidadeDeTransacoes++;
 }
 
-void ContaBancaria::Consultar(){
+void ContaBancaria::consultar(){
     if(ativa) {
         cout << "Saldo: " << saldo << endl;
     }
 }
 
-void ContaBancaria::Fechar(){
+void ContaBancaria::fechar(){
     if(ativa) {
         numeroDaConta = 0;
         numeroDaAgencia = 0;
         nomeCliente = "";
-        tipoDaConta = 0;
+        tipoDaConta = CONTA_CORRENTE;
         saldo = 0;
         ativa = false;
+        delete historicoDasTransacoes;
+        quantidadeDeTransacoes = 0;
     }
 }
 
-int main() {
-    ContaBancaria conta;
-    conta.Abrir(1234, 5678, "Joao", 1);
-    conta.Depositar(1000);
-    conta.Consultar();
-    conta.Sacar(500);
-    conta.Consultar();
-    conta.Fechar();
-    int teste1;
-    int teste2;
-    cin >> teste1 >> teste2;  
-
-    return 0;
+void ContaBancaria::retirarExtrato(){
+    if(ativa) {
+        for(int i = 0; i < quantidadeDeTransacoes; i++) {
+            cout << "--------------------------------" << endl;
+            cout << "Extrato da conta " << numeroDaConta << endl;
+            cout << "Transacao " << i + 1 << endl;
+            cout << "Tipo: ";
+            switch (historicoDasTransacoes[i].getTipo()) {
+                case DEPOSITO:
+                cout << "Deposito" << endl;
+                break;
+                case SAQUE:
+                cout << "Saque" << endl;
+                break;
+                case TRANSFERENCIA:
+                cout << "Transferencia" << endl;
+                break;
+            }
+            cout << "Valor: " << historicoDasTransacoes[i].getValor() << endl;
+            cout << "Data: " << historicoDasTransacoes[i].getData() << endl;
+            cout << "De: " << *historicoDasTransacoes[i].getDe() << endl;
+            cout << "Para: " << *historicoDasTransacoes[i].getPare() << endl;
+            cout << "--------------------------------" << endl;
+        };
+    }
 }

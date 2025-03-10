@@ -1,6 +1,15 @@
 #include <string>
+#include "Transacao.h"
 
-class ContaBancaria{
+using namespace std;
+
+enum TipoConta {
+    CONTA_CORRENTE,
+    CONTA_POUPANCA,
+    CONTA_SALARIO
+};
+
+class ContaBancaria {
     public: 
         // Construtor padrão
         ContaBancaria();
@@ -8,18 +17,21 @@ class ContaBancaria{
         ~ContaBancaria();
     
         // Métodos
-        bool Abrir(int numeroConta, int numeroAgencia, std::string nome, int tipo);
-        bool AlteraSenha(std::string senha);
-        void Depositar(float valor);
-        void Sacar(float valor);
-        void Consultar();
-        void Fechar();
+        bool abrir(int numeroConta, int numeroAgencia, string nome, TipoConta tipo);
+        bool alteraSenha(string senha);
+        void depositar(float valor);
+        void sacar(float valor);
+        void consultar();
+        void fechar();
+        void retirarExtrato();
     private:
         int numeroDaConta;
         int numeroDaAgencia;
-        std::string nomeCliente;
-        std::string senha;
-        int tipoDaConta;
+        string nomeCliente;
+        string senha;
+        TipoConta tipoDaConta;
         float saldo;
         bool ativa;
+        Transacao *historicoDasTransacoes;
+        int quantidadeDeTransacoes;
 };
