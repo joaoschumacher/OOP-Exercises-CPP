@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Retangulo.cpp"
+#include "Retangulo.h"
 
 using namespace std;
 

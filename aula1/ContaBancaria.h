@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include "Transacao.h"
 
@@ -18,7 +19,7 @@ class ContaBancaria {
     
         // Métodos
         bool abrir(int numeroConta, int numeroAgencia, string nome, TipoConta tipo);
-        bool alteraSenha(string senha);
+        bool alterarSenha(string senha);
         void depositar(float valor);
         void sacar(float valor);
         void consultar();

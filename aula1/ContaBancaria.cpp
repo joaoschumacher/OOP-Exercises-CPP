@@ -1,5 +1,4 @@
 #include "ContaBancaria.h"
-#include "Transacao.cpp"
 #include <iostream>
 #include <string>
 
@@ -18,7 +17,7 @@ ContaBancaria::ContaBancaria() {
 }
 
 ContaBancaria::~ContaBancaria() {
-    delete historicoDasTransacoes;
+   //delete historicoDasTransacoes;
 }
 
 bool ContaBancaria::abrir(int numeroConta, int numeroAgencia, string nome, TipoConta tipo) {
@@ -36,7 +35,7 @@ bool ContaBancaria::abrir(int numeroConta, int numeroAgencia, string nome, TipoC
     }
 }
 
-bool ContaBancaria::alteraSenha(string senhaNova){
+bool ContaBancaria::alterarSenha(string senhaNova){
     if(ativa) {
         senha = senhaNova;
         return true;
@@ -74,7 +73,7 @@ void ContaBancaria::fechar(){
         tipoDaConta = CONTA_CORRENTE;
         saldo = 0;
         ativa = false;
-        delete historicoDasTransacoes;
+        // delete historicoDasTransacoes;
         quantidadeDeTransacoes = 0;
     }
 }
