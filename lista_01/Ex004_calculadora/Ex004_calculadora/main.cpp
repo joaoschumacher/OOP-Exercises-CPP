@@ -1,37 +1,25 @@
-#include "Calculadora.h"
+#include "Empresa.h"
 #include <iostream>
 
 using namespace std;
 
 int main() {
-    Calculadora calculadora(VERMELHO);
-    calculadora.imprimeInfo();
+	FuncionarioCaixa funcionarioCaixa1("Joao", "Rua 1", Calculadora(VERDE));
+	FuncionarioCaixa funcionarioCaixa2("Maria", "Rua 2", Calculadora(AZUL));
 
-    float soma1 = calculadora.soma(10.5, 5.5);
-    float soma2 = calculadora.soma(10.5, -5.5);
-    float subtracao1 = calculadora.subtrai(20.0, 7.5);
-    float subtracao2 = calculadora.subtrai(7.5, 20.0);
-    float subtracao3 = calculadora.subtrai(-7.5, 20.0);
-    float multiplicacao = calculadora.multiplica(4.0, 3.5);
-    float divisao = calculadora.divide(15.0, 3.0);
+	cout << "Funcionario 1: " << funcionarioCaixa1.getNome() << endl;
+	cout << "2 + 2 = " << funcionarioCaixa1.soma(2, 2) << endl;
+	cout << "5 - 4 = " << funcionarioCaixa1.subtrai(5, 4) << endl;
+	cout << "2 x 3 = " << funcionarioCaixa1.multiplica(2, 3) << endl;
+	cout << "--------------------------------" << endl;
+	cout << "Funcionario 2: " << funcionarioCaixa2.getNome() << endl;
+	cout << "6 / 3 = " << funcionarioCaixa2.divide(6, 3) << endl;
+	cout << "7 + 2 = " << funcionarioCaixa2.soma(7, 2) << endl;
+	cout << "8 x 3 = " << funcionarioCaixa2.multiplica(8, 3) << endl;
+	cout << "--------------------------------" << endl;
 
-    cout << "Soma (10.5 + 5.5): " << soma1 << endl;
-    cout << "Soma (10.5 + (-5.5)): " << soma2 << endl;
-    cout << "Subtracao (20.0 - 7.5): " << subtracao1 << endl;
-    cout << "Subtracao (7.5 - 20.0): " << subtracao2 << endl;
-    cout << "Subtracao (-7.5 - 20.0): " << subtracao3 << endl;
-    cout << "Multiplicacao (4.0 * 3.5): " << multiplicacao << endl;
-    cout << "Divisao (15.0 / 3.0): " << divisao << endl;
-
-    int quadrado = calculadora.elevaQuadrado(4);
-    int cubo = calculadora.elevaCubo(3);
-
-    cout << "Quadrado de 4: " << quadrado << endl;
-    cout << "Cubo de 3: " << cubo << endl;
-
-    calculadora.setMemoria(50.5);
-    calculadora.setCor(AZUL);
-    calculadora.imprimeInfo();
+	Empresa empresa("Empresa 1", funcionarioCaixa1, funcionarioCaixa2);
+	empresa.imprime_info();
 
     return 0;
 }
