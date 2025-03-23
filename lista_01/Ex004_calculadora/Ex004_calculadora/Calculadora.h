@@ -37,7 +37,6 @@ class Calculadora {
 		float subtrai(float valor1, float valor2);
 		float multiplica(float valor1, float valor2);
 		float divide(float valor1, float valor2);
-
 		int elevaQuadrado(int valor);
 		int elevaCubo(int valor);
 
